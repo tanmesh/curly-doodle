@@ -11,6 +11,8 @@ using namespace std;
 #define fast 			ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define watch(x) 		cout << (#x) << " is " << (x) << endl
 
+// https://leetcode.com/problems/moving-average-from-data-stream/
+
 class MovingAverage {
 public:
 	deque<int> q;
