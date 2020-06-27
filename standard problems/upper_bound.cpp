@@ -13,21 +13,15 @@ using namespace std;
 
 int upperBound(vector<int>& input, int n, int key) {
 	int low = 0, high = n - 1;
-	while (low <= high) {
+	while (low < high) {
 		int mid = low + (high - low) / 2;
-		if (key == input[mid]) {
-			if (input[mid + 1] != input[mid]) {
-				return mid;
-			} else {
-				low = mid + 1;
-			}
-		} else if (key < input[mid]) {
-			high = mid - 1;
+		if (key < input[mid]) {
+			high = mid;
 		} else {
 			low = mid + 1;
 		}
 	}
-	return -1;
+	return low;
 }
 
 int main () {
