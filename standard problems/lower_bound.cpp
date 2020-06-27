@@ -12,7 +12,7 @@ using namespace std;
 #define watch(x) 		cout << (#x) << " is " << (x) << endl
 
 int lowerBound(vector<int>& input, int n, int key) {
-	int low = 0, high = n - 1, mid = low + (high - low) / 2;
+	int low = 0, high = n - 1;
 	while (low < high) {
 		int mid = low + (high - low) / 2;
 		if (key <= input[mid]) {
