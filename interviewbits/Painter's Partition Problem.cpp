@@ -11,43 +11,39 @@ using namespace std;
 #define fast 			ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define watch(x) 		cout << (#x) << " is " << (x) << endl
 
-int check(long long int mid, vector<int>& C) {
-	int count = 1;
-	long long int sum = 0;
-	for (int i = 0; i < C.size(); i++) {
-		if (sum + C[i] > mid)   {
-			sum = C[i];
-			count++;
-			if (C[i] > mid)  {
-				return INT_MAX;
-			}
-		}
-		else {
+bool p(long long int mid, vector<int>& C, int A) {
+	long long int cnt = 1, sum = 0;
+	for (int i = 0; i < C.size(); ++i) {
+		if (sum + C[i] <= mid) {
 			sum += C[i];
+		} else {
+			++cnt;
+			sum = C[i];
 		}
 	}
-	return count;
+	if (cnt <= A) {
+		return true;
+	}
+	return false;
 }
 
 int paint(int A, int B, vector<int> &C) {
-	long long int low = LONG_MAX, high = 0;
-	for (int i = 0; i < C.size(); i++) {
-		low = min(low, (long long)C[i]);
-		high += C[i];
+	long long int l = LONG_MIN, h = 0;
+	for (int i = 0; i < C.size(); ++i) {
+		l = max(l, (long long )C[i]);
+		h += C[i];
 	}
-	long long int ans, mid;
 
-	while (low <= high) {
-		mid = low + (high - low) / 2;
-		if (check(mid, C) <= A) {
-			ans = mid;
-			high = mid - 1;
-		}
-		else {
-			low = mid + 1;
+	while (l < h) {
+		long long int mid = l + (h - l) / 2;
+		if (p(mid, C, A) == true) {
+			h = mid;
+		} else {
+			l = mid + 1;
 		}
 	}
-	return (ans * B) % 10000003;
+
+	return (l * B) % 10000003;
 }
 
 int main () {
