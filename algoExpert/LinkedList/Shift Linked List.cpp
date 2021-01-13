@@ -27,10 +27,10 @@ LinkedList *shiftLinkedList(LinkedList *head, int k) {
 	int newTailPos = k > 0 ? listLength - offset : offset;
 
 	LinkedList *newTail = head;
-	int tmpOffset = newTailPos;
-	while (tmpOffset != 1) {
+	int tmpNewTailPos = newTailPos;
+	while (tmpNewTailPos != 1) {
 		newTail = newTail->next;
-		--tmpOffset;
+		--tmpNewTailPos;
 	}
 
 	LinkedList *newHead = newTail->next;
@@ -38,5 +38,3 @@ LinkedList *shiftLinkedList(LinkedList *head, int k) {
 	tail->next = head;
 	return newHead;
 }
-
-
