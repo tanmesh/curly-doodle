@@ -1,79 +1,59 @@
-#include <bits/stdc++.h>
+class Solution {
+public:
 
-using namespace std;
+    int findLowerBound(vector<int>& nums, int target) {
+        int low = 0, high = nums.size() - 1;
 
-#define all(a)          a.begin(), a.end()
-#define allr(a)         a.rbegin(), a.rend()
-#define F				first
-#define S				second
-#define pb              push_back
-#define ll				long long
-#define fast 			ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-#define watch(x) 		cout << (#x) << " is " << (x) << endl
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] == target) {
+                high = mid;
+            } else if (nums[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
 
-int upperBound(vector<int>& input, int n, int key) {
-	int low = 0, high = n;
-	while (low < high) {
-		int mid = low + (high - low) / 2;
-		if (key < input[mid]) {
-			high = mid;
-		} else {
-			low = mid + 1;
-		}
-	}
-	return low;
-}
+        if (nums[low] != target) {
+            return -1;
+        }
+        return low;
+    }
 
-int lowerBound(vector<int>& input, int n, int key) {
-	int low = 0, high = n;
-	while (low < high) {
-		int mid = low + (high - low) / 2;
-		if (key <= input[mid]) {
-			high = mid;
-		} else {
-			low = mid + 1;
-		}
-	}
-	return low;
-}
+    int findUpperBound(vector<int>& nums, int target) {
+        int low = 0, high = nums.size() - 1;
 
-vector<int> searchRange(vector<int>& nums, int target) {
-	vector<int> ans;
-	int left = lowerBound(nums, nums.size(), target);
-	int right = upperBound(nums, nums.size(), target);
+        while (low < high) {
+            int mid = low + (high - low + 1) / 2;
+            if (nums[mid] == target) {
+                low = mid;
+            } else if (nums[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
 
-	if (left == right) {
-		vector<int> a;
-		a.push_back(-1);
-		a.push_back(-1);
-		return a;
-	}
-	vector<int> a;
-	a.push_back(left);
-	a.push_back(right - 1);
-	return a;
-}
+        if (low == nums.size()) {
+            return -1;
+        }
+        if (nums[low] != target) {
+            return -1;
+        }
 
-void print(vector<int>& input) {
-	for (int i = 0; i < input.size(); ++i) {
-		cout << input[i] << " ";
-	}
-	cout << endl;
-}
+        return low;
+    }
 
-int main () {
-	fast
-	int n;
-	cin >> n;
-	vector<int> input(n);
-	for (int i = 0; i < n; ++i) {
-		cin >> input[i];
-	}
-	int target;
-	cin >> target;
+    vector<int> searchRange(vector<int>& nums, int target) {
+        if (nums.size() == 0) {
+            return vector<int> { -1, -1};
+        }
 
-	vector<int> output = searchRange(input, target);
+        int lowerBound = findLowerBound(nums, target);
 
-	print(output);
-	return 0;
-}
+        int upperBound = findUpperBound(nums, target);
+
+        return vector<int> {lowerBound, upperBound};
+    }
+};
