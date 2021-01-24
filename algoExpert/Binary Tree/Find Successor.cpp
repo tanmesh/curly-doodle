@@ -19,7 +19,7 @@ BinaryTree *leftMostChild(BinaryTree *currentNode) {
 	return currentNode;
 }
 
-BinaryTree *rightMostChild(BinaryTree *currentNode) {
+BinaryTree *rightMostParent(BinaryTree *currentNode) {
 	while (currentNode->parent != NULL && currentNode->parent->right == currentNode) {
 		currentNode = currentNode->parent;
 	}
@@ -30,7 +30,7 @@ BinaryTree *findSuccessor(BinaryTree *tree, BinaryTree *node) {
 	if (node->right != NULL) {
 		return leftMostChild(node->right);
 	}
-	return rightMostChild(node);
+	return rightMostParent(node);
 }
 
 
