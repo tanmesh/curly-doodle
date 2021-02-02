@@ -1,4 +1,4 @@
-// Solution 3
+// Solution 2
 using namespace std;
 
 bool isMonotonic(vector<int> array) {
