@@ -1,22 +1,22 @@
 class Solution {
-public:
-    void findPaths(vector<vector<int>> &graph, vector<int> resultantPath, vector<vector<int>> &ans, int currentNode) {
-        if (currentNode == graph.size() - 1) {
-            resultantPath.push_back(currentNode);
-            ans.push_back(resultantPath);
+private:
+    void dfs(int currentNode, int targetNode, vector<int> path, vector<vector<int>>& graph, vector<vector<int>> &result) {
+        path.push_back(currentNode);
+
+        if (currentNode == targetNode) {
+            result.push_back(path);
             return;
         }
 
-        resultantPath.push_back(currentNode);
-        for (auto it : graph[currentNode]) {
-            findPaths(graph, resultantPath, ans, it);
+        for (int i = 0; i < graph[currentNode].size(); ++i) {
+            dfs(graph[currentNode][i], targetNode, path, graph, result);
         }
     }
-
+public:
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
-        vector<vector<int>> ans;
-        vector<int> resultantPath;
-        findPaths(graph, resultantPath, ans, 0);
-        return ans;
+        vector<vector<int>> result;
+
+        dfs(0, graph.size() - 1, vector<int> {}, graph, result);
+        return result;
     }
 };
