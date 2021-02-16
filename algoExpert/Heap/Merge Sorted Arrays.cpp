@@ -16,13 +16,12 @@ vector<int> mergeSortedArrays(vector<vector<int>> arrays) {
 			pq.push(it);
 		}
 	}
-
 	vector<int> result;
 	while (!pq.empty()) {
-		result.push_back(pq.top());
+		int element = pq.top();
+		result.push_back(element);
 		pq.pop();
 	}
-
 	return result;
 }
 
