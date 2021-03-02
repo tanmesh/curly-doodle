@@ -8,12 +8,14 @@ public:
             if(nums[mid] == target) {
                 return mid;
             } else if(nums[low] <= nums[mid]) {
+                // this means that the first half sub-array is non-rotated subarray.
                 if(nums[low] <= target && target < nums[mid]) {
                     high = mid - 1;
                 } else {
                     low = mid + 1;
                 }
             } else {
+                // this means that the second half sub-array is non-rotated subarray.
                 if(nums[mid] < target && target <= nums[high]) {
                     low = mid + 1;
                 } else {
