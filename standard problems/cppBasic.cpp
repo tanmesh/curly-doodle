@@ -31,14 +31,14 @@ void minHeapVsMaxHeap() {
 		pq2.push(it);
 	}
 
-	cout << "Compared a < b : ";
+	cout << "MaxHeap -- Compared a < b : ";
 	while(!pq1.empty()) {
 		cout << pq1.top() << " ";
 		pq1.pop();
 	}
 	cout << endl;
 
-	cout << "Compared a > b : ";
+	cout << "MinHeap -- Compared a > b : ";
 	while(!pq2.empty()) {
 		cout << pq2.top() << " ";
 		pq2.pop();
