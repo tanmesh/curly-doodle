@@ -46,7 +46,30 @@ void minHeapVsMaxHeap() {
 	cout << endl;
 }
 
+void print(vector<int> &arr) {
+	for(auto it: arr) {
+		cout << it << " ";
+	}
+	cout << endl;
+}
+
+bool cmp(int& a, int& b) {
+    return a < b;
+}
+
+void sortArray() {
+	vector<int> arr = {100,2, 9,4, 3,5, -1,45};
+	cout << "Before sort\n";
+	print(arr);
+
+	sort(arr.begin(), arr.end(), cmp);
+
+	cout << "After sort\n";
+	print(arr);
+}
+
 int main() {
-	minHeapVsMaxHeap();	
+	// minHeapVsMaxHeap();	
+	sortArray();
 	return 0;
 }
