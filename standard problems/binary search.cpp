@@ -1,4 +1,9 @@
-#include <bits/stdc++.h>
+#include <ctime>
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+#include <unordered_map>
+#include <queue>
 
 using namespace std;
 
@@ -11,43 +16,52 @@ using namespace std;
 #define fast 			ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define watch(x) 		cout << (#x) << " is " << (x) << endl
 
-int upperBound(vector<int>& input, int n, int key) {
-	int low = 0, high = n;
-	while (low < high) {
-		int mid = low + (high - low) / 2;
-		if (key < input[mid]) {
-			high = mid;
-		} else {
-			low = mid + 1;
-		}
-	}
-	return low;
+int upperBound(vector<int>& input, int target) {
+	int low = 0, high = input.size()-1;
+    while(low <= high) {
+        int mid = low + (high - low)/2;
+        if(input[mid] <= target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    if(high >= 0 && high < input.size() && input[high] == target) {
+        return high;
+    }
+    return -1;
 }
 
-int lowerBound(vector<int>& input, int n, int key) {
-	int low = 0, high = n;
-	while (low < high) {
-		int mid = low + (high - low) / 2;
-		if (key <= input[mid]) {
-			high = mid;
-		} else {
-			low = mid + 1;
-		}
-	}
-	return low;
+int lowerBound(vector<int>& input, int target) {
+	int low = 0, high = input.size()-1;
+    while(low <= high) {
+        int mid = low + (high - low)/2;
+        if(input[mid] < target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    if(low >= 0 && low < input.size() && input[low] == target) {
+        return low;
+    }
+    return -1;
 }
 
-int binarySearch(vector<int>& input, int n, int key) {
-	int low = 0, high = n - 1;
-	while (low <= high) {
+int binarySearch(vector<int>& input, int target) {
+	int low = 0, high = input.size() - 1;
+	while (low < high) {
 		int mid = low + (high - low) / 2;
-		if (key == input[mid]) {
+		if (target == input[mid]) {
 			return mid;
-		} else if (key < input[mid]) {
+		} else if (target < input[mid]) {
 			high = mid - 1;
 		} else {
 			low = mid + 1;
 		}
+	}
+	if(low < input.size() && input[low] == target) {
+		return low;
 	}
 	return -1;
 }
@@ -55,18 +69,22 @@ int binarySearch(vector<int>& input, int n, int key) {
 
 int main () {
 	fast
+	cout << "Enter array length: ";
 	int n;
 	cin >> n;
 	vector<int> input(n);
+	cout << "Enter array elements: ";
 	for (int i = 0; i < n; ++i) {
 		cin >> input[i];
 	}
-	int key;
-	cin >> key;
+	cout << "Enter target value: ";
+	int target;
+	cin >> target;
 
-	cout << "lowerBound: " << lowerBound(input, n, key) << endl;
-	cout << "upperBound: " << upperBound(input, n, key) << endl;
-	// cout << binarySearch(input, n, key) << endl;
+
+	cout << "binary serch: " << binarySearch(input, target) << endl;
+	cout << "lowerBound: " << lowerBound(input, target) << endl;
+	cout << "upperBound: " << upperBound(input, target) << endl;
 	return 0;
 }
 
