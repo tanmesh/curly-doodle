@@ -66,7 +66,6 @@ int binarySearch(vector<int>& input, int target) {
 	return -1;
 }
 
-
 int main () {
 	fast
 	cout << "Enter array length: ";
